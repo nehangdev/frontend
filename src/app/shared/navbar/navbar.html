@@ -1,0 +1,57 @@
+<nav *ngIf="isLoggedIn()" class="fixed top-0 left-0 w-full bg-blue-700 shadow-md z-10">
+    <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+        <a routerLink="/dashboard" class="text-white text-xl font-semibold tracking-wider">
+            TaskFlow Pro
+        </a>
+
+        <!-- Profile Dropdown -->
+        <div class="relative inline-block text-left" (click)="isOpen = !isOpen">
+            <!-- Profile Button -->
+            <button type="button"
+                class="flex items-center justify-center w-10 h-10 rounded-full bg-gray-200 hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                <span class="sr-only">Open user menu</span>
+                <!-- Replace with <img> if you have user avatar -->
+                <span class="text-gray-700 font-semibold">{{ userInitials }}</span>
+            </button>
+
+            <!-- Dropdown Menu -->
+            <div *ngIf="isOpen"
+                class="absolute right-0 mt-2 w-48 origin-top-right rounded-xl bg-white shadow-lg ring-1 ring-black/5 focus:outline-none z-50">
+                <div class="py-2">
+                    <!-- Username -->
+                    <div class="px-4 py-2 text-sm text-gray-700 border-b">
+                        <p class="text-sm font-semibold text-gray-800">
+                            {{ userData.firstName }} {{ userData.lastName }}
+                            <span class="text-xs text-blue-600 ml-1">({{ userData.role | uppercase }})</span>
+                        </p>
+                        <p class="text-xs text-gray-500 truncate mt-0.5">
+                            {{ userData.email }}
+                        </p>
+                    </div>
+                    <a *ngIf="userData.role === 'admin'" routerLink="/admin/users" (click)="isDropdownOpen = false"
+                        class="flex justify-between w-full text-left px-4 py-2 text-sm text-indigo-600 hover:bg-gray-100 hover:text-indigo-700 border-b border-gray-100 cursor-pointer">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="size-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z" />
+                        </svg>
+                        Manage Users
+                    </a>
+                    <!-- Logout -->
+                    <button (click)="onLogout()"
+                        class="flex justify-between w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 cursor-pointer">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="size-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15M12 9l-3 3m0 0 3 3m-3-3h12.75" />
+                        </svg>
+                        Logout
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</nav>
+
+<div *ngIf="isLoggedIn()" class="pt-16"></div>
